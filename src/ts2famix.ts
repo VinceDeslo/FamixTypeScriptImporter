@@ -10,6 +10,9 @@ import { Interface } from "readline";
 
 const cyclomatic = require('./lib/ts-complex/cyclomatic-service');
 
+/**
+ * Main Importer definition
+ */
 export class TS2Famix {
 
     private readonly fmxNamespacesMap = new Map<string, Famix.Namespace>();
@@ -22,12 +25,18 @@ export class TS2Famix {
 
     private currentCC: any; // store cc metrics for current file
 
+    /**
+     * Generates a FAMIX Repo from provided source files (-i)
+     */
     famixRepFromPath(paths: Array<string>) {
         try {
+            // Generate project
             console.info(`paths = ${paths}`);
             const project = new Project();
             const sourceFiles = project.addSourceFilesAtPaths(paths);
             console.info("Source files:")
+
+            // Generate File anchor and Modules for each source file
             sourceFiles.forEach(file => {
                 console.info(`> ${file.getBaseName()}`);
 
@@ -42,8 +51,8 @@ export class TS2Famix {
                 }
                 this.readNamespace(file, file.getFilePath(), null);
             });
-            // Create accesses
-            console.log(`Creating accesses:`);
+
+            // Generate Array of Structural entities
             this.arrayOfAccess.forEach((value, key) => {
                 console.log(`  Access(es) to ${value.getName()}:`);
                 let famixStructuralElement = this.fmxRep.getFamixElementById(key) as Famix.StructuralEntity;
@@ -78,6 +87,8 @@ export class TS2Famix {
                 });
             });
             console.log(`Creating invocations:`);
+
+            // Generate Array of Behavioural entities
             this.arrayOfInvocation.forEach((value, key) => {
                 console.log(`  Invocation(s) to ${value.getName()}:`);
                 let famixBehaviouralElement = this.fmxRep.getFamixElementById(key) as Famix.BehaviouralEntity;
@@ -103,7 +114,8 @@ export class TS2Famix {
 
                 });
             });
-            //Inheritance
+            
+            // Get Inheritance structure for all Classes 
             this.allClasses.forEach(cls => {
                 const baseClass = cls.getBaseClass();
                 if (baseClass !== undefined) {
@@ -126,6 +138,8 @@ export class TS2Famix {
                     }
                 });
             });
+
+            // Get Inheritance structure for all Interfaces 
             this.allInterfaces.forEach(inter => {
                 const baseInter = inter.getBaseTypes()[0];
                 if (baseInter !== undefined && baseInter.getText() !== 'Object') {
@@ -146,6 +160,9 @@ export class TS2Famix {
         return this.fmxRep;
     }
 
+    /**
+     * Creates a File Anchor for a FAMIX element
+     */
     private makeFamixIndexFileAnchor(filePath: string, startPos: number, endPos: number, famixElement: Famix.SourcedEntity) {
         let fmxIndexFileAnchor = new Famix.IndexedFileAnchor(this.fmxRep);
         fmxIndexFileAnchor.setFileName(filePath);
@@ -155,7 +172,10 @@ export class TS2Famix {
             fmxIndexFileAnchor.setElement(famixElement);
         }
     }
-    //Arezoo
+    
+    /**
+     * Gets Interfaces, Classes and Functions for each namespace of a set of modules
+     */
     private readNamespace(currentModules: ModuleDeclaration[] | SourceFile, filePath, parentScope: Famix.Namespace = null) {
 
         let namespaceName: string;
@@ -225,7 +245,10 @@ export class TS2Famix {
             });
         }
     }
-    //Arezoo
+    
+    /**
+     * Sets the Methods, Properties and Constructors of all classes in a file
+     */
     private setClassElements(classesInFile: ClassDeclaration[], filePath, fmxNamespace: Famix.Namespace) {
 
         this.allClasses.push(...classesInFile);   //????????????????????
@@ -509,6 +532,9 @@ export class TS2Famix {
         return fmxType;
     }
 
+    /**
+     * CURRENTLY UNUSED
+     */
     private getAccessor(object: any): string {
         const keyword: string = "";
         const xx = object.hasModifier(SyntaxKind.ProtectedKeyword);

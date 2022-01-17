@@ -184,6 +184,7 @@ export class TS2Famix {
         let classesInFile: ClassDeclaration[];
         let functionsInFile: FunctionDeclaration[];
 
+        // Validate if a SourceFile is provided with multiple modules
         if ((currentModules as SourceFile).getModules === undefined) {
             (currentModules as ModuleDeclaration[]).forEach(namespace => {
 
@@ -195,7 +196,7 @@ export class TS2Famix {
 
                 console.info(`namespace: ${namespaceName}`);
                 console.info(`classes: ${classesInFile.map(c => c.getName())}`);
-                // console.info(`interfaces: ${interfaces.map(i => i.getName())}`);
+                // console.info(`interfaces: ${interfacesInFile.map(i => i.getName())}`);
 
                 this.makeFamixIndexFileAnchor(filePath, namespace.getStart(), namespace.getEnd(), fmxNamespace);
 
@@ -216,6 +217,7 @@ export class TS2Famix {
                 }
             });
         }
+        // When no Modules are provided use default name space
         else {
             // namespaceName = "DefaultNamespace";
             // fmxNamespace = this.checkFamixNamespace(namespaceName, parentScope);
@@ -281,6 +283,9 @@ export class TS2Famix {
         });
     }
 
+    /**
+     * Sets the Methods and Properties of all interfaces in a file
+     */
     private setInterfaceElements(interfacesInFile: InterfaceDeclaration[], filePath, fmxNamespace: Famix.Namespace) {
 
         this.allInterfaces.push(...interfacesInFile);
@@ -305,7 +310,10 @@ export class TS2Famix {
             });
         });
     }
-    //Arezoo
+    
+    /**
+     * Checks if a Famix namespace is set if not the method sets it (used in readNamepsace())
+     */
     private checkFamixNamespace(namespaceName: string, parentScope: Famix.Namespace = null): Famix.Namespace {
 
         let fmxNamespace: Famix.Namespace;
@@ -324,6 +332,9 @@ export class TS2Famix {
         return fmxNamespace;
     }
 
+    /**
+     * Make a Famix class for a Class or an Interface
+     */
     private createFamixClass(cls: ClassDeclaration | InterfaceDeclaration, filePath, isInterface = false): Famix.Class {
         let fmxClass = new Famix.Class(this.fmxRep);
         let clsName = cls.getName();
@@ -336,9 +347,11 @@ export class TS2Famix {
         return fmxClass;
     }
 
-    private createFamixMethod(method: MethodDeclaration | ConstructorDeclaration | MethodSignature,
-        filePath: string, isSignature = false, isConstructor = false): Famix.Method {
-        console.log(` creating a FamixFunction:`);
+    /**
+     * Make a Famix method for a Method or a Constructor
+     */
+    private createFamixMethod(method: MethodDeclaration | ConstructorDeclaration | MethodSignature, filePath
+        , isSignature = false, isConstructor = false): Famix.Method {
 
         let fmxMethod = new Famix.Method(this.fmxRep);
         if (isConstructor) {
@@ -429,6 +442,9 @@ export class TS2Famix {
         return fmxMethod;
     }
 
+    /**
+     * Make a Famix function for a Function (including Parameters and local Variables)
+     */
     private createFamixFunction(func: FunctionDeclaration, filePath): Famix.Function {
         console.log(` creating a FamixFunction:`);
         let fmxFunction = new Famix.Function(this.fmxRep);
@@ -442,7 +458,7 @@ export class TS2Famix {
 
         this.makeFamixIndexFileAnchor(filePath, func.getStart(), func.getEnd(), fmxFunction);
 
-        //Parameters
+        // Get the contained Parameters
         let parameters = func.getParameters();
         if (parameters.length > 0) {
             parameters.forEach(param => {
@@ -459,8 +475,7 @@ export class TS2Famix {
         }
         fmxFunction.setNumberOfParameters(parameters.length);
 
-        //Arezoo
-        //Variables
+        // Get the contained Variables
         let variables = func.getVariableDeclarations();
         if (variables.length > 0) {
             console.info(`  Variables:`);
@@ -485,6 +500,9 @@ export class TS2Famix {
         return fmxFunction;
     }
 
+    /**
+     * Create a Famix Attribute for the class Property of a class or of an interface
+     */
     private createFamixAttribute(property: PropertyDeclaration | PropertySignature, filePath, isSignature = false): Famix.Attribute {
 
         let fmxAttribute = new Famix.Attribute(this.fmxRep);
@@ -505,6 +523,9 @@ export class TS2Famix {
         return fmxAttribute;
     }
 
+    /**
+     * Extract the Usable Name from a `getType().getText()` call
+     */
     private getUsableName(name: string): string {
         console.log(`getUsableName: ${name}`);
         if (name.includes('<')) {
@@ -519,6 +540,9 @@ export class TS2Famix {
         return name;
     }
 
+    /**
+     * Accessor for the Famix type from a provided name string
+     */
     private getFamixType(typeName: string): Famix.Type {
         let fmxType: Famix.Type;
         if (!this.fmxTypes.has(typeName)) {

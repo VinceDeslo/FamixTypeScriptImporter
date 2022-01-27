@@ -31,11 +31,13 @@ export class TS2Famix {
     famixRepFromPath(paths: Array<string>) {
         try {
             // Generate project
+            console.log("...GENERATING PROJECT...");
             console.info(`paths = ${paths}`);
             const project = new Project();
             const sourceFiles = project.addSourceFilesAtPaths(paths);
-            console.info("Source files:")
 
+            console.log("...GENERATING SOURCE FILE ANCHORS AND MODULES...");
+            console.info("Source files:")
             // Generate File anchor and Modules for each source file
             sourceFiles.forEach(file => {
                 console.info(`> ${file.getBaseName()}`);
@@ -52,6 +54,7 @@ export class TS2Famix {
                 this.readNamespace(file, file.getFilePath(), null);
             });
 
+            console.log("...GENERATING STRUCTURAL ENTITIES...");
             // Generate Array of Structural entities
             this.arrayOfAccess.forEach((value, key) => {
                 console.log(`  Access(es) to ${value.getName()}:`);
@@ -88,6 +91,7 @@ export class TS2Famix {
             });
             console.log(`Creating invocations:`);
 
+            console.log("...GENERATING BEHAVIOURAL ENTITIES...");
             // Generate Array of Behavioural entities
             this.arrayOfInvocation.forEach((value, key) => {
                 console.log(`  Invocation(s) to ${value.getName()}:`);
@@ -115,6 +119,7 @@ export class TS2Famix {
                 });
             });
             
+            console.log("...GENERATING INHERITANCE STRUCTURE FOR ALL CLASSES...");
             // Get Inheritance structure for all Classes 
             this.allClasses.forEach(cls => {
                 const baseClass = cls.getBaseClass();
@@ -139,6 +144,7 @@ export class TS2Famix {
                 });
             });
 
+            console.log("...GENERATING INHERITANCE STRUCTURE FOR ALL INTERFACES...");
             // Get Inheritance structure for all Interfaces 
             this.allInterfaces.forEach(inter => {
                 const baseInter = inter.getBaseTypes()[0];
@@ -164,6 +170,7 @@ export class TS2Famix {
      * Creates a File Anchor for a FAMIX element
      */
     private makeFamixIndexFileAnchor(filePath: string, startPos: number, endPos: number, famixElement: Famix.SourcedEntity) {
+        console.log("...GENERATING A FILE ANCHOR...");
         let fmxIndexFileAnchor = new Famix.IndexedFileAnchor(this.fmxRep);
         fmxIndexFileAnchor.setFileName(filePath);
         fmxIndexFileAnchor.setStartPos(startPos);
@@ -178,6 +185,7 @@ export class TS2Famix {
      */
     private readNamespace(currentModules: ModuleDeclaration[] | SourceFile, filePath, parentScope: Famix.Namespace = null) {
 
+        console.log("...READING THE NAMESPACE...");
         let namespaceName: string;
         let fmxNamespace: Famix.Namespace;
         let interfacesInFile: InterfaceDeclaration[];
@@ -253,6 +261,7 @@ export class TS2Famix {
      */
     private setClassElements(classesInFile: ClassDeclaration[], filePath, fmxNamespace: Famix.Namespace) {
 
+        console.log("...SETTING CLASS ELEMENTS...");
         this.allClasses.push(...classesInFile);   //????????????????????
         console.info("Analyzing classes:");
         classesInFile.forEach(cls => {
@@ -288,6 +297,7 @@ export class TS2Famix {
      */
     private setInterfaceElements(interfacesInFile: InterfaceDeclaration[], filePath, fmxNamespace: Famix.Namespace) {
 
+        console.log("...SETTING INTERFACE ELEMENTS...");
         this.allInterfaces.push(...interfacesInFile);
         console.info("Analyzing interfaces:");
         interfacesInFile.forEach(inter => {
@@ -316,6 +326,7 @@ export class TS2Famix {
      */
     private checkFamixNamespace(namespaceName: string, parentScope: Famix.Namespace = null): Famix.Namespace {
 
+        console.log("...CHECKING IF A FAMIX NAMESPACE IS SET...");
         let fmxNamespace: Famix.Namespace;
         if (!this.fmxNamespacesMap.has(namespaceName)) {
             fmxNamespace = new Famix.Namespace(this.fmxRep);
@@ -336,6 +347,7 @@ export class TS2Famix {
      * Make a Famix class for a Class or an Interface
      */
     private createFamixClass(cls: ClassDeclaration | InterfaceDeclaration, filePath, isInterface = false): Famix.Class {
+        console.log("...CREATING A FAMIX CLASS...");
         let fmxClass = new Famix.Class(this.fmxRep);
         let clsName = cls.getName();
         fmxClass.setName(clsName);
@@ -353,6 +365,7 @@ export class TS2Famix {
     private createFamixMethod(method: MethodDeclaration | ConstructorDeclaration | MethodSignature, filePath
         , isSignature = false, isConstructor = false): Famix.Method {
 
+        console.log("...CREATING A FAMIX METHOD...");
         let fmxMethod = new Famix.Method(this.fmxRep);
         if (isConstructor) {
             fmxMethod.setName("constructor");
@@ -505,6 +518,7 @@ export class TS2Famix {
      */
     private createFamixAttribute(property: PropertyDeclaration | PropertySignature, filePath, isSignature = false): Famix.Attribute {
 
+        console.log("...CREATING A FAMIX ATTRIBUTE...");
         let fmxAttribute = new Famix.Attribute(this.fmxRep);
         fmxAttribute.setName(property.getName());
 

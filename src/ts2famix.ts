@@ -259,13 +259,13 @@ export class TS2Famix {
             console.info(`> ${cls.getName()}`);
             let fmxClass = this.createFamixClass(cls, filePath);
             fmxNamespace.addTypes(fmxClass);
-            this.extractDecorators(cls, fmxClass, filePath);
+            this.extractDecorators(cls, fmxClass, filePath, fmxNamespace);
 
             console.info("Methods:");
             cls.getMethods().forEach(method => {
                 console.info(` > ${method.getName()}`);
-                let fmxMethod = this.createFamixMethod(method, filePath);
-                this.extractDecorators(method, fmxMethod, filePath);
+                let fmxMethod = this.createFamixMethod(method, filePath, fmxNamespace);
+                this.extractDecorators(method, fmxMethod, filePath, fmxNamespace);
                 fmxClass.addMethods(fmxMethod);
             });
 
@@ -273,14 +273,14 @@ export class TS2Famix {
             cls.getProperties().forEach(prop => {
                 console.info(` > ${prop.getName()}`);
                 let fmxAttr = this.createFamixAttribute(prop, filePath);
-                this.extractDecorators(prop, fmxAttr, filePath);
+                this.extractDecorators(prop, fmxAttr, filePath, fmxNamespace);
                 fmxClass.addAttributes(fmxAttr);
             });
 
             console.info("Constructors:");
             cls.getConstructors().forEach(cstr => {
                 console.info(` > ${cstr.getSignature().getDeclaration().getText().split("\n")[0].trim()} ...`);
-                let fmxMethod = this.createFamixMethod(cstr, filePath, false, true);
+                let fmxMethod = this.createFamixMethod(cstr, filePath, fmxNamespace, false, true);
                 fmxClass.addMethods(fmxMethod);
             });
         });
@@ -301,7 +301,7 @@ export class TS2Famix {
             console.info("Methods:");
             inter.getMethods().forEach(method => {
                 console.info(` > ${method.getName()}`);
-                let fmxMethod = this.createFamixMethod(method, filePath, true);
+                let fmxMethod = this.createFamixMethod(method, filePath, fmxNamespace, true);
                 fmxInterface.addMethods(fmxMethod);
             });
 
@@ -353,8 +353,13 @@ export class TS2Famix {
     /**
      * Make a Famix method for a Method or a Constructor
      */
-    private createFamixMethod(method: MethodDeclaration | ConstructorDeclaration | MethodSignature, filePath
-        , isSignature = false, isConstructor = false): Famix.Method {
+    private createFamixMethod(
+		method: MethodDeclaration | ConstructorDeclaration | MethodSignature, 
+		filePath: StandardizedFilePath,
+		fmxNamespace: Famix.Namespace, 
+		isSignature: boolean = false, 
+		isConstructor: boolean = false,
+	): Famix.Method {
 
         let fmxMethod = new Famix.Method(this.fmxRep);
         if (isConstructor) {
@@ -404,7 +409,7 @@ export class TS2Famix {
                 let paramTypeName = this.getUsableName(param.getType().getText());
                 fmxParam.setDeclaredType(this.getFamixType(paramTypeName));
                 fmxParam.setName(param.getName());
-                this.extractDecorators(param, fmxParam, filePath);
+                this.extractDecorators(param, fmxParam, filePath, fmxNamespace);
 
                 fmxMethod.addParameters(fmxParam);
                 this.makeFamixIndexFileAnchor(filePath, param.getStart(), param.getEnd(), fmxParam);
@@ -580,15 +585,17 @@ export class TS2Famix {
      */
     private extractDecorators(
         instance: ClassDeclaration | MethodDeclaration | PropertyDeclaration | ParameterDeclaration,
-        fmxEntity: Famix.Class | Famix.Method | Famix.Attribute | Famix.Parameter,
-        filePath: StandardizedFilePath
+        fmxEntity: Famix.Decorateable,
+        filePath: StandardizedFilePath,
+		fmxNamespace: Famix.Namespace
     ) {
         console.info(`Extracting decorators:`);
         instance.getDecorators().forEach(decorator => {
+			let decoratorType = instance.constructor.name.replace('Declaration','');
+			let isFactory = decorator.isDecoratorFactory();
 
             console.info(` > @${decorator.getName()}()`);
-            console.info(`  ~ type: ${instance.constructor.name.replace('Declaration','')} Decorator`);
-            let isFactory = decorator.isDecoratorFactory();
+            console.info(`  ~ type: ${decoratorType} Decorator`);
             console.info(`  ~ factory: ${isFactory}`);
             console.info(`  ~ arguments: ${
                 decorator
@@ -596,34 +603,40 @@ export class TS2Famix {
                     .reduce((acc, val) => { return acc.concat(`${val.getText()}, `)}, '')
             }`);
 
-            let fmxDecorator = this.createFamixDecorator(decorator, filePath, isFactory);
-            fmxEntity.addAnnotationInstances(fmxDecorator);
+            let fmxDecorator = this.createFamixDecorator(decorator, decoratorType, fmxEntity, filePath, isFactory);
+			fmxNamespace.addFunctions(fmxDecorator);
         });
     }
 
     /**
      * Make a Famix Annotation to represent a Typescript decorator
      */
-    private createFamixDecorator(decorator: Decorator, filepath, isFactory: boolean){
-       
-       // Fetch the decorators name
-       let fmxDecorator = new Famix.AnnotationType(this.fmxRep);
-       let decoratorName = decorator.getName();
-       fmxDecorator.setName(decoratorName);
-       
-       // Define a decorator instance
-       let fmxDecoratorInstance = new Famix.AnnotationInstance(this.fmxRep);
-       fmxDecoratorInstance.setAnnotationType(fmxDecorator);
-       
-       // Add decorator arguments as annotation attributes
-       decorator.getArguments().forEach(arg => {
-           let fmxDecoratorAttribute = new Famix.AnnotationInstanceAttribute(this.fmxRep);
-           
-           fmxDecoratorAttribute.setValue(arg.getText());
-           fmxDecoratorInstance.addAttributes(fmxDecoratorAttribute);
-       });
-       
-       this.makeFamixIndexFileAnchor(filepath, decorator.getStart(), decorator.getEnd(), fmxDecorator);
-       return fmxDecoratorInstance;
+    private createFamixDecorator(
+		decorator: Decorator, 
+		decoratorType: string,
+		decoratedEntity: Famix.Decorateable,
+		filePath: StandardizedFilePath, 
+		isFactory: boolean
+	){
+    	let fmxDecorator = new Famix.Decorator(this.fmxRep);
+
+		// Set the decorators properties
+    	fmxDecorator.setName(decorator.getName());
+		fmxDecorator.setDecoratorType(decoratorType);
+		fmxDecorator.setDecoratedEntity(decoratedEntity);
+		fmxDecorator.setIsFactory(isFactory);
+
+    	// Add decorator arguments as parameters
+    	decorator.getArguments().forEach(param => {
+    	    let fmxDecoratorParam = new Famix.Parameter(this.fmxRep);
+		    fmxDecoratorParam.setParentBehaviouralEntity(fmxDecorator);
+			
+			fmxDecoratorParam.setName(param.getText());
+			fmxDecorator.addParameters(fmxDecoratorParam);
+			this.makeFamixIndexFileAnchor(filePath, param.getStart(), param.getEnd(), fmxDecoratorParam);
+		});
+	
+    	this.makeFamixIndexFileAnchor(filePath, decorator.getStart(), decorator.getEnd(), fmxDecorator);
+    	return fmxDecorator;
     }
 }

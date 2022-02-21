@@ -6,20 +6,12 @@
             "ref": 5
         },
         "name": "CatsController",
-        "annotationInstances": [
-            {
-                "ref": 7
-            },
-            {
-                "ref": 11
-            }
-        ],
         "container": {
             "ref": 3
         },
         "behavioursWithDeclaredType": [
             {
-                "ref": 50
+                "ref": 48
             }
         ],
         "methods": [
@@ -27,13 +19,13 @@
                 "ref": 14
             },
             {
-                "ref": 30
+                "ref": 28
             },
             {
-                "ref": 35
+                "ref": 32
             },
             {
-                "ref": 50
+                "ref": 48
             }
         ],
         "isInterface": false
@@ -58,6 +50,32 @@
             {
                 "ref": 4
             }
+        ],
+        "functions": [
+            {
+                "ref": 6
+            },
+            {
+                "ref": 10
+            },
+            {
+                "ref": 19
+            },
+            {
+                "ref": 22
+            },
+            {
+                "ref": 24
+            },
+            {
+                "ref": 30
+            },
+            {
+                "ref": 37
+            },
+            {
+                "ref": 44
+            }
         ]
     },
     {
@@ -71,40 +89,46 @@
         "endPos": 878
     },
     {
-        "FM3": "FamixTypeScript.AnnotationType",
+        "FM3": "FamixTypeScript.Decorator",
         "id": 6,
         "sourceAnchor": {
             "ref": 9
         },
         "name": "UseGuards",
-        "instances": [
+        "parameters": [
             {
                 "ref": 7
             }
-        ]
-    },
-    {
-        "FM3": "FamixTypeScript.AnnotationInstance",
-        "id": 7,
-        "annotatedEntity": {
+        ],
+        "container": {
+            "ref": 3
+        },
+        "decoratorType": "Class",
+        "decoratedEntity": {
             "ref": 4
         },
-        "annotationType": {
-            "ref": 6
-        },
-        "attributes": [
-            {
-                "ref": 8
-            }
-        ]
+        "isFactory": true
     },
     {
-        "FM3": "FamixTypeScript.AnnotationInstanceAttribute",
+        "FM3": "FamixTypeScript.Parameter",
+        "id": 7,
+        "sourceAnchor": {
+            "ref": 8
+        },
+        "name": "RolesGuard",
+        "parentBehaviouralEntity": {
+            "ref": 6
+        }
+    },
+    {
+        "FM3": "FamixTypeScript.IndexedFileAnchor",
         "id": 8,
-        "parentAnnotationInstance": {
+        "element": {
             "ref": 7
         },
-        "value": "RolesGuard"
+        "fileName": "/home/vince/Repos/MGL843/nest/sample/01-cats-app/src/cats/cats.controller.ts",
+        "startPos": 425,
+        "endPos": 435
     },
     {
         "FM3": "FamixTypeScript.IndexedFileAnchor",
@@ -117,40 +141,46 @@
         "endPos": 436
     },
     {
-        "FM3": "FamixTypeScript.AnnotationType",
+        "FM3": "FamixTypeScript.Decorator",
         "id": 10,
         "sourceAnchor": {
             "ref": 13
         },
         "name": "Controller",
-        "instances": [
+        "parameters": [
             {
                 "ref": 11
             }
-        ]
-    },
-    {
-        "FM3": "FamixTypeScript.AnnotationInstance",
-        "id": 11,
-        "annotatedEntity": {
+        ],
+        "container": {
+            "ref": 3
+        },
+        "decoratorType": "Class",
+        "decoratedEntity": {
             "ref": 4
         },
-        "annotationType": {
-            "ref": 10
-        },
-        "attributes": [
-            {
-                "ref": 12
-            }
-        ]
+        "isFactory": true
     },
     {
-        "FM3": "FamixTypeScript.AnnotationInstanceAttribute",
+        "FM3": "FamixTypeScript.Parameter",
+        "id": 11,
+        "sourceAnchor": {
+            "ref": 12
+        },
+        "name": "'cats'",
+        "parentBehaviouralEntity": {
+            "ref": 10
+        }
+    },
+    {
+        "FM3": "FamixTypeScript.IndexedFileAnchor",
         "id": 12,
-        "parentAnnotationInstance": {
+        "element": {
             "ref": 11
         },
-        "value": "'cats'"
+        "fileName": "/home/vince/Repos/MGL843/nest/sample/01-cats-app/src/cats/cats.controller.ts",
+        "startPos": 449,
+        "endPos": 455
     },
     {
         "FM3": "FamixTypeScript.IndexedFileAnchor",
@@ -169,27 +199,20 @@
             "ref": 16
         },
         "name": "create",
-        "annotationInstances": [
-            {
-                "ref": 24
-            },
-            {
-                "ref": 27
-            }
-        ],
         "fullyQualifiedName": "\"/home/vince/Repos/MGL843/nest/sample/01-cats-app/src/cats/cats.controller\".CatsController.create",
         "numberOfParameters": 1,
         "declaredType": {
             "ref": 15
         },
+        "cyclomaticComplexity": 1,
         "numberOfStatements": 1,
         "numberOfLinesOfCode": 4,
         "accesses": [
             {
-                "ref": 55
+                "ref": 53
             },
             {
-                "ref": 57
+                "ref": 55
             }
         ],
         "parameters": [
@@ -211,7 +234,7 @@
                 "ref": 14
             },
             {
-                "ref": 30
+                "ref": 28
             }
         ]
     },
@@ -229,17 +252,12 @@
         "FM3": "FamixTypeScript.Parameter",
         "id": 17,
         "sourceAnchor": {
-            "ref": 22
+            "ref": 21
         },
         "name": "createCatDto",
-        "annotationInstances": [
-            {
-                "ref": 20
-            }
-        ],
         "incomingAccesses": [
             {
-                "ref": 55
+                "ref": 53
             }
         ],
         "declaredType": {
@@ -260,31 +278,24 @@
         ]
     },
     {
-        "FM3": "FamixTypeScript.AnnotationType",
+        "FM3": "FamixTypeScript.Decorator",
         "id": 19,
         "sourceAnchor": {
-            "ref": 21
+            "ref": 20
         },
         "name": "Body",
-        "instances": [
-            {
-                "ref": 20
-            }
-        ]
-    },
-    {
-        "FM3": "FamixTypeScript.AnnotationInstance",
-        "id": 20,
-        "annotatedEntity": {
+        "container": {
+            "ref": 3
+        },
+        "decoratorType": "Parameter",
+        "decoratedEntity": {
             "ref": 17
         },
-        "annotationType": {
-            "ref": 19
-        }
+        "isFactory": true
     },
     {
         "FM3": "FamixTypeScript.IndexedFileAnchor",
-        "id": 21,
+        "id": 20,
         "element": {
             "ref": 19
         },
@@ -294,7 +305,7 @@
     },
     {
         "FM3": "FamixTypeScript.IndexedFileAnchor",
-        "id": 22,
+        "id": 21,
         "element": {
             "ref": 17
         },
@@ -303,79 +314,78 @@
         "endPos": 625
     },
     {
-        "FM3": "FamixTypeScript.AnnotationType",
-        "id": 23,
+        "FM3": "FamixTypeScript.Decorator",
+        "id": 22,
         "sourceAnchor": {
-            "ref": 25
+            "ref": 23
         },
         "name": "Post",
-        "instances": [
-            {
-                "ref": 24
-            }
-        ]
-    },
-    {
-        "FM3": "FamixTypeScript.AnnotationInstance",
-        "id": 24,
-        "annotatedEntity": {
+        "container": {
+            "ref": 3
+        },
+        "decoratorType": "Method",
+        "decoratedEntity": {
             "ref": 14
         },
-        "annotationType": {
-            "ref": 23
-        }
+        "isFactory": true
     },
     {
         "FM3": "FamixTypeScript.IndexedFileAnchor",
-        "id": 25,
+        "id": 23,
         "element": {
-            "ref": 23
+            "ref": 22
         },
         "fileName": "/home/vince/Repos/MGL843/nest/sample/01-cats-app/src/cats/cats.controller.ts",
         "startPos": 550,
         "endPos": 557
     },
     {
-        "FM3": "FamixTypeScript.AnnotationType",
-        "id": 26,
+        "FM3": "FamixTypeScript.Decorator",
+        "id": 24,
         "sourceAnchor": {
-            "ref": 29
-        },
-        "name": "Roles",
-        "instances": [
-            {
-                "ref": 27
-            }
-        ]
-    },
-    {
-        "FM3": "FamixTypeScript.AnnotationInstance",
-        "id": 27,
-        "annotatedEntity": {
-            "ref": 14
-        },
-        "annotationType": {
-            "ref": 26
-        },
-        "attributes": [
-            {
-                "ref": 28
-            }
-        ]
-    },
-    {
-        "FM3": "FamixTypeScript.AnnotationInstanceAttribute",
-        "id": 28,
-        "parentAnnotationInstance": {
             "ref": 27
         },
-        "value": "'admin'"
+        "name": "Roles",
+        "parameters": [
+            {
+                "ref": 25
+            }
+        ],
+        "container": {
+            "ref": 3
+        },
+        "decoratorType": "Method",
+        "decoratedEntity": {
+            "ref": 14
+        },
+        "isFactory": true
+    },
+    {
+        "FM3": "FamixTypeScript.Parameter",
+        "id": 25,
+        "sourceAnchor": {
+            "ref": 26
+        },
+        "name": "'admin'",
+        "parentBehaviouralEntity": {
+            "ref": 24
+        }
     },
     {
         "FM3": "FamixTypeScript.IndexedFileAnchor",
-        "id": 29,
+        "id": 26,
         "element": {
-            "ref": 26
+            "ref": 25
+        },
+        "fileName": "/home/vince/Repos/MGL843/nest/sample/01-cats-app/src/cats/cats.controller.ts",
+        "startPos": 567,
+        "endPos": 574
+    },
+    {
+        "FM3": "FamixTypeScript.IndexedFileAnchor",
+        "id": 27,
+        "element": {
+            "ref": 24
         },
         "fileName": "/home/vince/Repos/MGL843/nest/sample/01-cats-app/src/cats/cats.controller.ts",
         "startPos": 560,
@@ -383,32 +393,54 @@
     },
     {
         "FM3": "FamixTypeScript.Method",
-        "id": 30,
+        "id": 28,
         "sourceAnchor": {
-            "ref": 31
+            "ref": 29
         },
         "name": "findAll",
-        "annotationInstances": [
-            {
-                "ref": 33
-            }
-        ],
         "fullyQualifiedName": "\"/home/vince/Repos/MGL843/nest/sample/01-cats-app/src/cats/cats.controller\".CatsController.findAll",
         "numberOfParameters": 0,
         "declaredType": {
             "ref": 15
         },
+        "cyclomaticComplexity": 1,
         "numberOfStatements": 1,
         "numberOfLinesOfCode": 3,
         "accesses": [
             {
-                "ref": 59
+                "ref": 57
             }
         ],
         "kind": "MethodDeclaration",
         "parentType": {
             "ref": 4
         }
+    },
+    {
+        "FM3": "FamixTypeScript.IndexedFileAnchor",
+        "id": 29,
+        "element": {
+            "ref": 28
+        },
+        "fileName": "/home/vince/Repos/MGL843/nest/sample/01-cats-app/src/cats/cats.controller.ts",
+        "startPos": 679,
+        "endPos": 764
+    },
+    {
+        "FM3": "FamixTypeScript.Decorator",
+        "id": 30,
+        "sourceAnchor": {
+            "ref": 31
+        },
+        "name": "Get",
+        "container": {
+            "ref": 3
+        },
+        "decoratorType": "Method",
+        "decoratedEntity": {
+            "ref": 28
+        },
+        "isFactory": true
     },
     {
         "FM3": "FamixTypeScript.IndexedFileAnchor",
@@ -418,63 +450,26 @@
         },
         "fileName": "/home/vince/Repos/MGL843/nest/sample/01-cats-app/src/cats/cats.controller.ts",
         "startPos": 679,
-        "endPos": 764
-    },
-    {
-        "FM3": "FamixTypeScript.AnnotationType",
-        "id": 32,
-        "sourceAnchor": {
-            "ref": 34
-        },
-        "name": "Get",
-        "instances": [
-            {
-                "ref": 33
-            }
-        ]
-    },
-    {
-        "FM3": "FamixTypeScript.AnnotationInstance",
-        "id": 33,
-        "annotatedEntity": {
-            "ref": 30
-        },
-        "annotationType": {
-            "ref": 32
-        }
-    },
-    {
-        "FM3": "FamixTypeScript.IndexedFileAnchor",
-        "id": 34,
-        "element": {
-            "ref": 32
-        },
-        "fileName": "/home/vince/Repos/MGL843/nest/sample/01-cats-app/src/cats/cats.controller.ts",
-        "startPos": 679,
         "endPos": 685
     },
     {
         "FM3": "FamixTypeScript.Method",
-        "id": 35,
+        "id": 32,
         "sourceAnchor": {
-            "ref": 37
+            "ref": 34
         },
         "name": "findOne",
-        "annotationInstances": [
-            {
-                "ref": 47
-            }
-        ],
         "fullyQualifiedName": "\"/home/vince/Repos/MGL843/nest/sample/01-cats-app/src/cats/cats.controller\".CatsController.findOne",
         "numberOfParameters": 1,
         "declaredType": {
-            "ref": 36
+            "ref": 33
         },
+        "cyclomaticComplexity": 1,
         "numberOfStatements": 0,
         "numberOfLinesOfCode": 6,
         "parameters": [
             {
-                "ref": 38
+                "ref": 35
             }
         ],
         "kind": "MethodDeclaration",
@@ -484,19 +479,19 @@
     },
     {
         "FM3": "FamixTypeScript.Type",
-        "id": 36,
+        "id": 33,
         "name": "void",
         "behavioursWithDeclaredType": [
             {
-                "ref": 35
+                "ref": 32
             }
         ]
     },
     {
         "FM3": "FamixTypeScript.IndexedFileAnchor",
-        "id": 37,
+        "id": 34,
         "element": {
-            "ref": 35
+            "ref": 32
         },
         "fileName": "/home/vince/Repos/MGL843/nest/sample/01-cats-app/src/cats/cats.controller.ts",
         "startPos": 768,
@@ -504,85 +499,99 @@
     },
     {
         "FM3": "FamixTypeScript.Parameter",
-        "id": 38,
+        "id": 35,
         "sourceAnchor": {
-            "ref": 45
+            "ref": 43
         },
         "name": "id",
-        "annotationInstances": [
-            {
-                "ref": 41
-            }
-        ],
         "declaredType": {
-            "ref": 39
+            "ref": 36
         },
         "parentBehaviouralEntity": {
-            "ref": 35
+            "ref": 32
         }
     },
     {
         "FM3": "FamixTypeScript.Type",
-        "id": 39,
+        "id": 36,
         "name": "number",
         "structuresWithDeclaredType": [
             {
-                "ref": 38
+                "ref": 35
             }
         ]
     },
     {
-        "FM3": "FamixTypeScript.AnnotationType",
-        "id": 40,
+        "FM3": "FamixTypeScript.Decorator",
+        "id": 37,
         "sourceAnchor": {
-            "ref": 44
+            "ref": 42
         },
         "name": "Param",
-        "instances": [
+        "parameters": [
             {
-                "ref": 41
-            }
-        ]
-    },
-    {
-        "FM3": "FamixTypeScript.AnnotationInstance",
-        "id": 41,
-        "annotatedEntity": {
-            "ref": 38
-        },
-        "annotationType": {
-            "ref": 40
-        },
-        "attributes": [
-            {
-                "ref": 42
+                "ref": 38
             },
             {
-                "ref": 43
+                "ref": 40
             }
-        ]
+        ],
+        "container": {
+            "ref": 3
+        },
+        "decoratorType": "Parameter",
+        "decoratedEntity": {
+            "ref": 35
+        },
+        "isFactory": true
     },
     {
-        "FM3": "FamixTypeScript.AnnotationInstanceAttribute",
-        "id": 42,
-        "parentAnnotationInstance": {
-            "ref": 41
+        "FM3": "FamixTypeScript.Parameter",
+        "id": 38,
+        "sourceAnchor": {
+            "ref": 39
         },
-        "value": "'id'"
-    },
-    {
-        "FM3": "FamixTypeScript.AnnotationInstanceAttribute",
-        "id": 43,
-        "parentAnnotationInstance": {
-            "ref": 41
-        },
-        "value": "new ParseIntPipe()"
+        "name": "'id'",
+        "parentBehaviouralEntity": {
+            "ref": 37
+        }
     },
     {
         "FM3": "FamixTypeScript.IndexedFileAnchor",
-        "id": 44,
+        "id": 39,
+        "element": {
+            "ref": 38
+        },
+        "fileName": "/home/vince/Repos/MGL843/nest/sample/01-cats-app/src/cats/cats.controller.ts",
+        "startPos": 802,
+        "endPos": 806
+    },
+    {
+        "FM3": "FamixTypeScript.Parameter",
+        "id": 40,
+        "sourceAnchor": {
+            "ref": 41
+        },
+        "name": "new ParseIntPipe()",
+        "parentBehaviouralEntity": {
+            "ref": 37
+        }
+    },
+    {
+        "FM3": "FamixTypeScript.IndexedFileAnchor",
+        "id": 41,
         "element": {
             "ref": 40
+        },
+        "fileName": "/home/vince/Repos/MGL843/nest/sample/01-cats-app/src/cats/cats.controller.ts",
+        "startPos": 808,
+        "endPos": 826
+    },
+    {
+        "FM3": "FamixTypeScript.IndexedFileAnchor",
+        "id": 42,
+        "element": {
+            "ref": 37
         },
         "fileName": "/home/vince/Repos/MGL843/nest/sample/01-cats-app/src/cats/cats.controller.ts",
         "startPos": 795,
@@ -590,55 +599,61 @@
     },
     {
         "FM3": "FamixTypeScript.IndexedFileAnchor",
-        "id": 45,
+        "id": 43,
         "element": {
-            "ref": 38
+            "ref": 35
         },
         "fileName": "/home/vince/Repos/MGL843/nest/sample/01-cats-app/src/cats/cats.controller.ts",
         "startPos": 795,
         "endPos": 842
     },
     {
-        "FM3": "FamixTypeScript.AnnotationType",
-        "id": 46,
+        "FM3": "FamixTypeScript.Decorator",
+        "id": 44,
         "sourceAnchor": {
-            "ref": 49
-        },
-        "name": "Get",
-        "instances": [
-            {
-                "ref": 47
-            }
-        ]
-    },
-    {
-        "FM3": "FamixTypeScript.AnnotationInstance",
-        "id": 47,
-        "annotatedEntity": {
-            "ref": 35
-        },
-        "annotationType": {
-            "ref": 46
-        },
-        "attributes": [
-            {
-                "ref": 48
-            }
-        ]
-    },
-    {
-        "FM3": "FamixTypeScript.AnnotationInstanceAttribute",
-        "id": 48,
-        "parentAnnotationInstance": {
             "ref": 47
         },
-        "value": "':id'"
+        "name": "Get",
+        "parameters": [
+            {
+                "ref": 45
+            }
+        ],
+        "container": {
+            "ref": 3
+        },
+        "decoratorType": "Method",
+        "decoratedEntity": {
+            "ref": 32
+        },
+        "isFactory": true
+    },
+    {
+        "FM3": "FamixTypeScript.Parameter",
+        "id": 45,
+        "sourceAnchor": {
+            "ref": 46
+        },
+        "name": "':id'",
+        "parentBehaviouralEntity": {
+            "ref": 44
+        }
     },
     {
         "FM3": "FamixTypeScript.IndexedFileAnchor",
-        "id": 49,
+        "id": 46,
         "element": {
-            "ref": 46
+            "ref": 45
+        },
+        "fileName": "/home/vince/Repos/MGL843/nest/sample/01-cats-app/src/cats/cats.controller.ts",
+        "startPos": 773,
+        "endPos": 778
+    },
+    {
+        "FM3": "FamixTypeScript.IndexedFileAnchor",
+        "id": 47,
+        "element": {
+            "ref": 44
         },
         "fileName": "/home/vince/Repos/MGL843/nest/sample/01-cats-app/src/cats/cats.controller.ts",
         "startPos": 768,
@@ -646,9 +661,9 @@
     },
     {
         "FM3": "FamixTypeScript.Method",
-        "id": 50,
+        "id": 48,
         "sourceAnchor": {
-            "ref": 51
+            "ref": 49
         },
         "name": "constructor",
         "fullyQualifiedName": "\"/home/vince/Repos/MGL843/nest/sample/01-cats-app/src/cats/cats.controller\".CatsController.__constructor",
@@ -660,7 +675,7 @@
         "numberOfLinesOfCode": 0,
         "parameters": [
             {
-                "ref": 52
+                "ref": 50
             }
         ],
         "kind": "Constructor",
@@ -670,9 +685,9 @@
     },
     {
         "FM3": "FamixTypeScript.IndexedFileAnchor",
-        "id": 51,
+        "id": 49,
         "element": {
-            "ref": 50
+            "ref": 48
         },
         "fileName": "/home/vince/Repos/MGL843/nest/sample/01-cats-app/src/cats/cats.controller.ts",
         "startPos": 489,
@@ -680,45 +695,68 @@
     },
     {
         "FM3": "FamixTypeScript.Parameter",
-        "id": 52,
+        "id": 50,
         "sourceAnchor": {
-            "ref": 54
+            "ref": 52
         },
         "name": "catsService",
         "incomingAccesses": [
             {
-                "ref": 57
+                "ref": 55
             },
             {
-                "ref": 59
+                "ref": 57
             }
         ],
         "declaredType": {
-            "ref": 53
+            "ref": 51
         },
         "parentBehaviouralEntity": {
-            "ref": 50
+            "ref": 48
         }
     },
     {
         "FM3": "FamixTypeScript.Type",
-        "id": 53,
+        "id": 51,
         "name": "CatsService",
         "structuresWithDeclaredType": [
             {
-                "ref": 52
+                "ref": 50
             }
         ]
     },
     {
         "FM3": "FamixTypeScript.IndexedFileAnchor",
-        "id": 54,
+        "id": 52,
         "element": {
-            "ref": 52
+            "ref": 50
         },
         "fileName": "/home/vince/Repos/MGL843/nest/sample/01-cats-app/src/cats/cats.controller.ts",
         "startPos": 501,
         "endPos": 542
+    },
+    {
+        "FM3": "FamixTypeScript.Access",
+        "id": 53,
+        "sourceAnchor": {
+            "ref": 54
+        },
+        "accessor": {
+            "ref": 14
+        },
+        "variable": {
+            "ref": 17
+        }
+    },
+    {
+        "FM3": "FamixTypeScript.IndexedFileAnchor",
+        "id": 54,
+        "element": {
+            "ref": 53
+        },
+        "fileName": "/home/vince/Repos/MGL843/nest/sample/01-cats-app/src/cats/cats.controller.ts",
+        "startPos": 657,
+        "endPos": 669
     },
     {
         "FM3": "FamixTypeScript.Access",
@@ -730,7 +768,7 @@
             "ref": 14
         },
         "variable": {
-            "ref": 17
+            "ref": 50
         }
     },
     {
@@ -740,8 +778,8 @@
             "ref": 55
         },
         "fileName": "/home/vince/Repos/MGL843/nest/sample/01-cats-app/src/cats/cats.controller.ts",
-        "startPos": 657,
-        "endPos": 669
+        "startPos": 638,
+        "endPos": 649
     },
     {
         "FM3": "FamixTypeScript.Access",
@@ -750,10 +788,10 @@
             "ref": 58
         },
         "accessor": {
-            "ref": 14
+            "ref": 28
         },
         "variable": {
-            "ref": 52
+            "ref": 50
         }
     },
     {
@@ -761,29 +799,6 @@
         "id": 58,
         "element": {
             "ref": 57
-        },
-        "fileName": "/home/vince/Repos/MGL843/nest/sample/01-cats-app/src/cats/cats.controller.ts",
-        "startPos": 638,
-        "endPos": 649
-    },
-    {
-        "FM3": "FamixTypeScript.Access",
-        "id": 59,
-        "sourceAnchor": {
-            "ref": 60
-        },
-        "accessor": {
-            "ref": 30
-        },
-        "variable": {
-            "ref": 52
-        }
-    },
-    {
-        "FM3": "FamixTypeScript.IndexedFileAnchor",
-        "id": 60,
-        "element": {
-            "ref": 59
         },
         "fileName": "/home/vince/Repos/MGL843/nest/sample/01-cats-app/src/cats/cats.controller.ts",
         "startPos": 738,

@@ -60,5 +60,5 @@ export {UnknownVariable} from "./unknown_variable";
 export {BehaviouralEntity} from "./behavioural_entity";
 export {Entity} from "./entity";
 export {Attribute} from "./attribute";
-export {Decorator, Decorateable} from "./decorator";
+
 

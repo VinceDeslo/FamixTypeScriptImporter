@@ -41,4 +41,10 @@ describe('ts2famix', () => {
         expect(decorator.name).toBe("propertyDec");
         expect(decorator.decoratorType).toBe("Property");
     })
+
+    it("should contain a parameterDec with the parameterDec decorator", async () => {
+        const decorator = parsedModel.filter(el => (el.FM3 == "FamixTypeScript.Decorator" && el.name == "parameterDec"))[0];
+        expect(decorator.name).toBe("parameterDec");
+        expect(decorator.decoratorType).toBe("Parameter");
+    })
 });

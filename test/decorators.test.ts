@@ -1,3 +1,4 @@
+import exp from 'constants';
 import { TS2Famix } from '../src/ts2famix';
 
 const filePaths = ["test_src/Decorators.ts"];
@@ -20,5 +21,12 @@ describe('ts2famix', () => {
     it("should contain a class with the classDec decorator", async () => {
         const decorator = parsedModel.filter(el => (el.FM3 == "FamixTypeScript.Decorator" && el.name == "classDec"))[0];
         expect(decorator.name).toBe("classDec");
+        expect(decorator.decoratorType).toBe("Class");
+    })
+
+    it("should contain a method with the methodDec decorator", async () => {
+        const decorator = parsedModel.filter(el => (el.FM3 == "FamixTypeScript.Decorator" && el.name == "methodDec"))[0];
+        expect(decorator.name).toBe("methodDec");
+        expect(decorator.decoratorType).toBe("Method");
     })
 });

@@ -35,4 +35,10 @@ describe('ts2famix', () => {
         expect(decorator.name).toBe("accessorDec");
         expect(decorator.decoratorType).toBe("Accessor");
     })
+
+    it("should contain a property with the propertyDec decorator", async () => {
+        const decorator = parsedModel.filter(el => (el.FM3 == "FamixTypeScript.Decorator" && el.name == "propertyDec"))[0];
+        expect(decorator.name).toBe("propertyDec");
+        expect(decorator.decoratorType).toBe("Property");
+    })
 });

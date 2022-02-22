@@ -29,4 +29,10 @@ describe('ts2famix', () => {
         expect(decorator.name).toBe("methodDec");
         expect(decorator.decoratorType).toBe("Method");
     })
+
+    it("should contain a accessor with the accessorDec decorator", async () => {
+        const decorator = parsedModel.filter(el => (el.FM3 == "FamixTypeScript.Decorator" && el.name == "accessorDec"))[0];
+        expect(decorator.name).toBe("accessorDec");
+        expect(decorator.decoratorType).toBe("Accessor");
+    })
 });

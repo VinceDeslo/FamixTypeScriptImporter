@@ -1,5 +1,5 @@
+import exp from 'constants';
 import { TS2Famix } from '../src/ts2famix';
-import 'jest-extended';
 
 const filePaths = ["test_src/Decorators.ts"];
 const importer = new TS2Famix();
@@ -19,7 +19,32 @@ describe('ts2famix', () => {
     initMapFromModel(parsedModel);
 
     it("should contain a class with the classDec decorator", async () => {
-        const decorator = parsedModel.filter(el => (el.FM3 == "FamixTypeScript.AnnotationType" && el.name == "classDec"))[0];
+        const decorator = parsedModel.filter(el => (el.FM3 == "FamixTypeScript.Decorator" && el.name == "classDec"))[0];
         expect(decorator.name).toBe("classDec");
+        expect(decorator.decoratorType).toBe("Class");
+    })
+
+    it("should contain a method with the methodDec decorator", async () => {
+        const decorator = parsedModel.filter(el => (el.FM3 == "FamixTypeScript.Decorator" && el.name == "methodDec"))[0];
+        expect(decorator.name).toBe("methodDec");
+        expect(decorator.decoratorType).toBe("Method");
+    })
+
+    it("should contain a accessor with the accessorDec decorator", async () => {
+        const decorator = parsedModel.filter(el => (el.FM3 == "FamixTypeScript.Decorator" && el.name == "accessorDec"))[0];
+        expect(decorator.name).toBe("accessorDec");
+        expect(decorator.decoratorType).toBe("Accessor");
+    })
+
+    it("should contain a property with the propertyDec decorator", async () => {
+        const decorator = parsedModel.filter(el => (el.FM3 == "FamixTypeScript.Decorator" && el.name == "propertyDec"))[0];
+        expect(decorator.name).toBe("propertyDec");
+        expect(decorator.decoratorType).toBe("Property");
+    })
+
+    it("should contain a parameterDec with the parameterDec decorator", async () => {
+        const decorator = parsedModel.filter(el => (el.FM3 == "FamixTypeScript.Decorator" && el.name == "parameterDec"))[0];
+        expect(decorator.name).toBe("parameterDec");
+        expect(decorator.decoratorType).toBe("Parameter");
     })
 });

@@ -5,6 +5,7 @@ import { Function } from "./../famix/function";
 import { NamedEntity } from "./../famix/named_entity";
 import { Type } from "./../famix/type";
 import { AnnotationType } from "./../famix/annotation_type";
+import { Decorator } from "./decorator";
 
 export class ContainerEntity extends NamedEntity {
 
@@ -49,6 +50,22 @@ export class ContainerEntity extends NamedEntity {
     if (!this.containerEntityFunctions.has(containerEntityFunctions)) {
       this.containerEntityFunctions.add(containerEntityFunctions);
       containerEntityFunctions.setContainer(this);
+    }
+  }
+
+  private containerEntityDecorators: Set<Decorator> = new Set();
+
+  // manyOne.Getter
+  // @FameProperty(name = "decorators", opposite = "container", derived = true)
+  public getDecorators(): Set<Decorator> {
+    return this.containerEntityDecorators;
+  }
+
+  // manyOne.Setter
+  public addDecorators(containerEntityDecorators: Decorator) {
+    if (!this.containerEntityDecorators.has(containerEntityDecorators)) {
+      this.containerEntityDecorators.add(containerEntityDecorators);
+      containerEntityDecorators.setContainer(this);
     }
   }
 

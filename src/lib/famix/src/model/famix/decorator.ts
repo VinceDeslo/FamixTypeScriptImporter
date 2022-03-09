@@ -1,10 +1,45 @@
-import { Attribute, Class, Function, Method, Parameter } from ".";
+import { 
+  Access,
+  Attribute, 
+  BehaviouralEntity, 
+  Class, 
+  ContainerEntity, 
+  Method,
+  Module, 
+  Parameter 
+} from ".";
 import { FamixJSONExporter } from "../../famix_JSON_exporter";
 
 // Defines the type of models that can be decorated in TypeScript
-export type Decorateable = Class| Method | Parameter | Attribute;
+export type Decorateable = Class| Method | Parameter | Attribute | Access;
 
-export class Decorator extends Function {
+export class Decorator extends BehaviouralEntity {
+
+  private decoratorContainer: ContainerEntity;
+
+  // oneMany.Getter
+  // @FameProperty(name = "container", opposite = "decorators")
+  public getContainer(): ContainerEntity {
+    return this.decoratorContainer;
+  }
+
+  // oneMany.Setter
+  public setContainer(newContainer: ContainerEntity) {
+    this.decoratorContainer = newContainer;
+    newContainer.getDecorators().add(this);
+  }
+
+  private decoratorParentModule: Module;
+
+  // @FameProperty(name = "parentModule")
+  public getParentModule(): Module {
+    return this.decoratorParentModule;
+  }
+
+  // oneMany.Setter
+  public setParentModule(decoratorParentModule: Module) {
+    this.decoratorParentModule = decoratorParentModule;
+  }
 
   private decoratorType: string;
 
@@ -55,6 +90,8 @@ export class Decorator extends Function {
   // Append properties to the model
   public addPropertiesToExporter(exporter: FamixJSONExporter) {
     super.addPropertiesToExporter(exporter);
+    exporter.addProperty("container", this.getContainer());
+    exporter.addProperty("parentModule", this.getParentModule());
     exporter.addProperty("decoratorType", this.getDecoratorType());
     exporter.addProperty("decoratedEntity", this.getDecoratedEntity());
     exporter.addProperty("isFactory", this.getIsFactory());

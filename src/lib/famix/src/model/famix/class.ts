@@ -1,5 +1,6 @@
 // automatically generated code, please do not change
 
+import { Access } from ".";
 import { FamixJSONExporter } from "../../famix_JSON_exporter";
 import { Type } from "./../famix/type";
 
@@ -27,6 +28,20 @@ export class Class extends Type {
     this.classIsInterface = classIsInterface;
   }
 
+  private classAccessors: Set<Access> = new Set();
+
+  // manyOne.Getter
+  // @FameProperty(name = "methods", opposite = "parentType", derived = true)
+  public getAccessors(): Set<Access> {
+    return this.classAccessors;
+  }
+
+  // manyOne.Setter
+  public addAccessors(classAccessors: Access) {
+    if (!this.classAccessors.has(classAccessors)) {
+      this.classAccessors.add(classAccessors);
+    }
+  }
 
   public getJSON(): string {
     const mse: FamixJSONExporter = new FamixJSONExporter("Class", this);

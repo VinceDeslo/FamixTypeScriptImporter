@@ -30,10 +30,16 @@ describe('ts2famix', () => {
         expect(decorator.decoratorType).toBe("Method");
     })
 
-    it("should contain a accessor with the accessorDec decorator", async () => {
-        const decorator = parsedModel.filter(el => (el.FM3 == "FamixTypeScript.Decorator" && el.name == "accessorDec"))[0];
-        expect(decorator.name).toBe("accessorDec");
-        expect(decorator.decoratorType).toBe("Accessor");
+    it("should contain a getter with the getterDec decorator", async () => {
+        const decorator = parsedModel.filter(el => (el.FM3 == "FamixTypeScript.Decorator" && el.name == "getterDec"))[0];
+        expect(decorator.name).toBe("getterDec");
+        expect(decorator.decoratorType).toBe("GetAccessor");
+    })
+
+    it("should contain a setter with the setterDec decorator", async () => {
+        const decorator = parsedModel.filter(el => (el.FM3 == "FamixTypeScript.Decorator" && el.name == "setterDec"))[0];
+        expect(decorator.name).toBe("setterDec");
+        expect(decorator.decoratorType).toBe("SetAccessor");
     })
 
     it("should contain a property with the propertyDec decorator", async () => {

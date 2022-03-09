@@ -9,11 +9,18 @@ const methodDec = () => {
     };
 }
 
-const accessorDec = () => {
+const getterDec = () => {
     return (target: any, propertyKey: string, descriptor: PropertyDescriptor) => {
         return;
     };
 }
+
+const setterDec = () => {
+    return (target: any, propertyKey: string, descriptor: PropertyDescriptor) => {
+        return;
+    };
+}
+
 
 const propertyDec = (value: string) => {
         return (target: any, propertyKey: string) => {
@@ -32,9 +39,14 @@ class SimpleDecoratorClass{
     @propertyDec("value")
     classProperty: string;
 
-    @accessorDec()
-    get accessor(){
+    @getterDec()
+    get getAccessor(){
         return this._accessor;
+    }
+
+    @setterDec()
+    set setAccessor(value: number){
+        this._accessor = value;
     }
 
     @methodDec()

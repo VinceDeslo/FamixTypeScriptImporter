@@ -1,6 +1,6 @@
 import {
     ClassDeclaration, ConstructorDeclaration, FunctionDeclaration, Identifier, InterfaceDeclaration
-    , MethodDeclaration, MethodSignature, ModuleDeclaration, ModuleDeclarationKind, Project, PropertyDeclaration, PropertySignature, SourceFile, StructureKind, VariableDeclaration, Decorator, ParameterDeclaration
+    , MethodDeclaration, MethodSignature, ModuleDeclaration, ModuleDeclarationKind, Project, PropertyDeclaration, PropertySignature, SourceFile, StructureKind, VariableDeclaration, Decorator, ParameterDeclaration, GetAccessorDeclaration, SetAccessorDeclaration
 } from "ts-morph";
 import * as Famix from "./lib/famix/src/model/famix";
 import { FamixRepository } from "./lib/famix/src/famix_repository";
@@ -282,6 +282,22 @@ export class TS2Famix {
                 console.info(` > ${cstr.getSignature().getDeclaration().getText().split("\n")[0].trim()} ...`);
                 let fmxMethod = this.createFamixMethod(cstr, filePath, fmxNamespace, false, true);
                 fmxClass.addMethods(fmxMethod);
+            });
+
+            console.info("Getters:");
+            cls.getGetAccessors().forEach(getter => {
+                console.info(` > ${getter.getName()}`);
+                let fmxGetter = this.createFamixAccessor(getter, filePath);
+                this.extractDecorators(getter, fmxGetter, filePath, fmxNamespace);
+                fmxClass.addAccessors(fmxGetter);
+            });
+
+            console.info("Setters:");
+            cls.getSetAccessors().forEach(setter => {
+                console.info(` > ${setter.getName()}`);
+                let fmxGetter = this.createFamixAccessor(setter, filePath);
+                this.extractDecorators(setter, fmxGetter, filePath, fmxNamespace);
+                fmxClass.addAccessors(fmxGetter);
             });
         });
     }
@@ -566,25 +582,29 @@ export class TS2Famix {
         return fmxType;
     }
 
-    /**
-     * CURRENTLY UNUSED
-     */
-    private getAccessor(object: any): string {
-        const keyword: string = "";
-        const xx = object.hasModifier(SyntaxKind.ProtectedKeyword);
-        if (object.hasModifier(SyntaxKind.PrivateKeyword))
-            return "Private";
-        else if (object.hasModifier(SyntaxKind.PublicKeyword))
-            return "Public";
-        else if (object.hasModifier(SyntaxKind.ProtectedKeyword))
-            return "Protected";
-    }
+    private createFamixAccessor(
+        accessor: GetAccessorDeclaration | SetAccessorDeclaration,
+        filePath: StandardizedFilePath
+    ){
+        // Initialize Famix entities
+        let fmxAccess = new Famix.Access(this.fmxRep);
+        let fmxAccessor = new Famix.BehaviouralEntity(this.fmxRep);
+
+        // Set accessor behavioural entity properties
+        fmxAccessor.setName(accessor.getName());
+
+        // Set access entity properties
+        fmxAccess.setAccessor(fmxAccessor);
+
+        this.makeFamixIndexFileAnchor(filePath, accessor.getStart(), accessor.getEnd(), fmxAccess);
+        return fmxAccess;
+    } 
     
     /**
      * Extracts decorators from decorateable declarations and creates famix entities for them
      */
     private extractDecorators(
-        instance: ClassDeclaration | MethodDeclaration | PropertyDeclaration | ParameterDeclaration,
+        instance: ClassDeclaration | MethodDeclaration | PropertyDeclaration | ParameterDeclaration | GetAccessorDeclaration | SetAccessorDeclaration,
         fmxEntity: Famix.Decorateable,
         filePath: StandardizedFilePath,
 		fmxNamespace: Famix.Namespace
@@ -604,7 +624,7 @@ export class TS2Famix {
             }`);
 
             let fmxDecorator = this.createFamixDecorator(decorator, decoratorType, fmxEntity, filePath, isFactory);
-			fmxNamespace.addFunctions(fmxDecorator);
+			fmxNamespace.addDecorators(fmxDecorator);
         });
     }
 

@@ -589,17 +589,12 @@ export class TS2Famix {
         // Initialize Famix entities
         let fmxAccess = new Famix.Access(this.fmxRep);
         let fmxAccessor = new Famix.BehaviouralEntity(this.fmxRep);
-        let fmxStructuralEntity = new Famix.StructuralEntity(this.fmxRep);
-
-        // Set variable structural entity properties
-        fmxStructuralEntity.setName(accessor.getName());
 
         // Set accessor behavioural entity properties
         fmxAccessor.setName(accessor.getName());
 
         // Set access entity properties
         fmxAccess.setAccessor(fmxAccessor);
-        fmxAccess.setVariable(fmxStructuralEntity);
 
         this.makeFamixIndexFileAnchor(filePath, accessor.getStart(), accessor.getEnd(), fmxAccess);
         return fmxAccess;

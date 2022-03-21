@@ -376,13 +376,10 @@
         "FM3": "FamixTypeScript.Access",
         "id": 31,
         "sourceAnchor": {
-            "ref": 34
+            "ref": 33
         },
         "accessor": {
             "ref": 32
-        },
-        "variable": {
-            "ref": 33
         }
     },
     {
@@ -396,18 +393,8 @@
         ]
     },
     {
-        "FM3": "FamixTypeScript.FAMIX.StructuralEntity",
-        "id": 33,
-        "name": "cachedAverageRating",
-        "incomingAccesses": [
-            {
-                "ref": 31
-            }
-        ]
-    },
-    {
         "FM3": "FamixTypeScript.IndexedFileAnchor",
-        "id": 34,
+        "id": 33,
         "element": {
             "ref": 31
         },
@@ -417,17 +404,17 @@
     },
     {
         "FM3": "FamixTypeScript.Decorator",
-        "id": 35,
+        "id": 34,
         "sourceAnchor": {
-            "ref": 40
+            "ref": 39
         },
         "name": "Field",
         "parameters": [
             {
-                "ref": 36
+                "ref": 35
             },
             {
-                "ref": 38
+                "ref": 37
             }
         ],
         "container": {
@@ -441,20 +428,20 @@
     },
     {
         "FM3": "FamixTypeScript.Parameter",
-        "id": 36,
+        "id": 35,
         "sourceAnchor": {
-            "ref": 37
+            "ref": 36
         },
         "name": "type => Float",
         "parentBehaviouralEntity": {
-            "ref": 35
+            "ref": 34
         }
     },
     {
         "FM3": "FamixTypeScript.IndexedFileAnchor",
-        "id": 37,
+        "id": 36,
         "element": {
-            "ref": 36
+            "ref": 35
         },
         "fileName": "/home/vince/Repos/MGL843/type-graphql/examples/apollo-cache/recipe-type.ts",
         "startPos": 352,
@@ -462,20 +449,20 @@
     },
     {
         "FM3": "FamixTypeScript.Parameter",
-        "id": 38,
+        "id": 37,
         "sourceAnchor": {
-            "ref": 39
+            "ref": 38
         },
         "name": "{ nullable: true }",
         "parentBehaviouralEntity": {
-            "ref": 35
+            "ref": 34
         }
     },
     {
         "FM3": "FamixTypeScript.IndexedFileAnchor",
-        "id": 39,
+        "id": 38,
         "element": {
-            "ref": 38
+            "ref": 37
         },
         "fileName": "/home/vince/Repos/MGL843/type-graphql/examples/apollo-cache/recipe-type.ts",
         "startPos": 367,
@@ -483,9 +470,9 @@
     },
     {
         "FM3": "FamixTypeScript.IndexedFileAnchor",
-        "id": 40,
+        "id": 39,
         "element": {
-            "ref": 35
+            "ref": 34
         },
         "fileName": "/home/vince/Repos/MGL843/type-graphql/examples/apollo-cache/recipe-type.ts",
         "startPos": 345,
@@ -493,14 +480,14 @@
     },
     {
         "FM3": "FamixTypeScript.Decorator",
-        "id": 41,
+        "id": 40,
         "sourceAnchor": {
-            "ref": 44
+            "ref": 43
         },
         "name": "CacheControl",
         "parameters": [
             {
-                "ref": 42
+                "ref": 41
             }
         ],
         "container": {
@@ -514,20 +501,20 @@
     },
     {
         "FM3": "FamixTypeScript.Parameter",
-        "id": 42,
+        "id": 41,
         "sourceAnchor": {
-            "ref": 43
+            "ref": 42
         },
         "name": "{ maxAge: 10 }",
         "parentBehaviouralEntity": {
-            "ref": 41
+            "ref": 40
         }
     },
     {
         "FM3": "FamixTypeScript.IndexedFileAnchor",
-        "id": 43,
+        "id": 42,
         "element": {
-            "ref": 42
+            "ref": 41
         },
         "fileName": "/home/vince/Repos/MGL843/type-graphql/examples/apollo-cache/recipe-type.ts",
         "startPos": 500,
@@ -535,9 +522,9 @@
     },
     {
         "FM3": "FamixTypeScript.IndexedFileAnchor",
-        "id": 44,
+        "id": 43,
         "element": {
-            "ref": 41
+            "ref": 40
         },
         "fileName": "/home/vince/Repos/MGL843/type-graphql/examples/apollo-cache/recipe-type.ts",
         "startPos": 486,
@@ -545,42 +532,29 @@
     },
     {
         "FM3": "FamixTypeScript.Access",
-        "id": 45,
+        "id": 44,
         "sourceAnchor": {
-            "ref": 48
-        },
-        "accessor": {
             "ref": 46
         },
-        "variable": {
-            "ref": 47
+        "accessor": {
+            "ref": 45
         }
     },
     {
         "FM3": "FamixTypeScript.BehaviouralEntity",
-        "id": 46,
+        "id": 45,
         "name": "averageRating",
         "accesses": [
             {
-                "ref": 45
-            }
-        ]
-    },
-    {
-        "FM3": "FamixTypeScript.FAMIX.StructuralEntity",
-        "id": 47,
-        "name": "averageRating",
-        "incomingAccesses": [
-            {
-                "ref": 45
+                "ref": 44
             }
         ]
     },
     {
         "FM3": "FamixTypeScript.IndexedFileAnchor",
-        "id": 48,
+        "id": 46,
         "element": {
-            "ref": 45
+            "ref": 44
         },
         "fileName": "/home/vince/Repos/MGL843/type-graphql/examples/apollo-cache/recipe-type.ts",
         "startPos": 676,
@@ -588,17 +562,17 @@
     },
     {
         "FM3": "FamixTypeScript.Decorator",
-        "id": 49,
+        "id": 47,
         "sourceAnchor": {
-            "ref": 54
+            "ref": 52
         },
         "name": "Field",
         "parameters": [
             {
-                "ref": 50
+                "ref": 48
             },
             {
-                "ref": 52
+                "ref": 50
             }
         ],
         "container": {
@@ -606,9 +580,30 @@
         },
         "decoratorType": "GetAccessor",
         "decoratedEntity": {
-            "ref": 45
+            "ref": 44
         },
         "isFactory": true
+    },
+    {
+        "FM3": "FamixTypeScript.Parameter",
+        "id": 48,
+        "sourceAnchor": {
+            "ref": 49
+        },
+        "name": "type => Float",
+        "parentBehaviouralEntity": {
+            "ref": 47
+        }
+    },
+    {
+        "FM3": "FamixTypeScript.IndexedFileAnchor",
+        "id": 49,
+        "element": {
+            "ref": 48
+        },
+        "fileName": "/home/vince/Repos/MGL843/type-graphql/examples/apollo-cache/recipe-type.ts",
+        "startPos": 683,
+        "endPos": 696
     },
     {
         "FM3": "FamixTypeScript.Parameter",
@@ -616,9 +611,9 @@
         "sourceAnchor": {
             "ref": 51
         },
-        "name": "type => Float",
+        "name": "{ nullable: true }",
         "parentBehaviouralEntity": {
-            "ref": 49
+            "ref": 47
         }
     },
     {
@@ -628,35 +623,14 @@
             "ref": 50
         },
         "fileName": "/home/vince/Repos/MGL843/type-graphql/examples/apollo-cache/recipe-type.ts",
-        "startPos": 683,
-        "endPos": 696
-    },
-    {
-        "FM3": "FamixTypeScript.Parameter",
-        "id": 52,
-        "sourceAnchor": {
-            "ref": 53
-        },
-        "name": "{ nullable: true }",
-        "parentBehaviouralEntity": {
-            "ref": 49
-        }
-    },
-    {
-        "FM3": "FamixTypeScript.IndexedFileAnchor",
-        "id": 53,
-        "element": {
-            "ref": 52
-        },
-        "fileName": "/home/vince/Repos/MGL843/type-graphql/examples/apollo-cache/recipe-type.ts",
         "startPos": 698,
         "endPos": 716
     },
     {
         "FM3": "FamixTypeScript.IndexedFileAnchor",
-        "id": 54,
+        "id": 52,
         "element": {
-            "ref": 49
+            "ref": 47
         },
         "fileName": "/home/vince/Repos/MGL843/type-graphql/examples/apollo-cache/recipe-type.ts",
         "startPos": 676,
